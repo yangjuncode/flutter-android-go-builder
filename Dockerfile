@@ -53,8 +53,8 @@ RUN yes | sdkmanager "ndk;$ANDROID_NDK_VERSION"  "cmake;3.22.1" >> /dev/null
 ENV PATH=$PATH:${ANDROID_HOME}/ndk/${ANDROID_NDK_VERSION}/toolchains/llvm/prebuilt/linux-x86_64/bin/
 
 # 安装go环境
-ARG go_version=go1.20.6
-#https://go.dev/dl/go1.20.6.linux-amd64.tar.gz
+ARG go_version=go1.20.12
+#https://go.dev/dl/go1.20.12.linux-amd64.tar.gz
 RUN wget -O go.tar.gz https://dl.google.com/go/${go_version}.linux-amd64.tar.gz \
     && tar -xzf go.tar.gz -C /usr/local/ \
     && rm -f go.tar.gz
@@ -64,7 +64,7 @@ ENV GOPROXY=https://goproxy.cn,direct \
 # install flutter
 # https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.10.6-stable.tar.xz
 # https://storage.flutter-io.cn/flutter_infra_release/releases/stable/linux/flutter_linux_3.10.6-stable.tar.xz
-ARG flutter_version=3.10.6
+ARG flutter_version=3.16.4
 RUN wget  -O /tmp/flutter.tar.xz https://storage.flutter-io.cn/flutter_infra_release/releases/stable/linux/flutter_linux_$flutter_version-stable.tar.xz \
     && tar -xf /tmp/flutter.tar.xz -C /usr/local/  \
     && export PATH=$PATH:/usr/local/flutter/bin:$HOME/.pub-cache/bin \

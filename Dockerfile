@@ -5,8 +5,8 @@ LABEL org.opencontainers.image.source=https://github.com/yangjuncode/flutter-and
 
 USER root
 
-ARG go_version=1.20.12
-ARG flutter_version=3.16.4
+ARG go_version=1.21.11
+ARG flutter_version=3.19.6
 
 ENV ANDROID_HOME=/opt/android-sdk-linux \
     LANG=en_US.UTF-8 \
@@ -17,7 +17,7 @@ ENV ANDROID_SDK_ROOT=$ANDROID_HOME \
     PATH=${PATH}:${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/emulator
 
 # comes from https://developer.android.com/studio/#command-tools
-ENV ANDROID_SDK_TOOLS_VERSION 9477386
+ENV ANDROID_SDK_TOOLS_VERSION 11076708
 
 RUN set -o xtrace \
     && cd /opt \
@@ -45,7 +45,7 @@ RUN set -o xtrace \
 
 # https://developer.android.com/studio/releases/build-tools
 ENV ANDROID_PLATFORM_VERSION 33
-ENV ANDROID_BUILD_TOOLS_VERSION 33.0.2
+ENV ANDROID_BUILD_TOOLS_VERSION 33.0.3
 RUN yes | sdkmanager \
    "platforms;android-$ANDROID_PLATFORM_VERSION" \
    "build-tools;$ANDROID_BUILD_TOOLS_VERSION"   

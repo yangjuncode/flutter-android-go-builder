@@ -48,7 +48,7 @@ ENV ANDROID_PLATFORM_VERSION 33
 ENV ANDROID_BUILD_TOOLS_VERSION 33.0.3
 RUN yes | sdkmanager \
    "platforms;android-$ANDROID_PLATFORM_VERSION" \
-   "build-tools;$ANDROID_BUILD_TOOLS_VERSION"   
+    "build-tools;$ANDROID_BUILD_TOOLS_VERSION" "build-tools;30.0.3"  
 
 # https://developer.android.com/ndk/downloads
 ENV ANDROID_NDK_VERSION 23.1.7779620

@@ -5,6 +5,8 @@ LABEL org.opencontainers.image.source=https://github.com/yangjuncode/flutter-and
 
 USER root
 
+ARG build_in_cn=0
+
 ARG go_version=1.21.11
 ARG flutter_version=3.19.6
 
@@ -21,7 +23,7 @@ ENV ANDROID_SDK_TOOLS_VERSION 11076708
 
 RUN set -o xtrace \
     && cd /opt \
-   && sed -i s@/archive.ubuntu.com/@/mirrors.tuna.tsinghua.edu.cn/@g /etc/apt/sources.list \
+   && if [ $build_in_cn -eq 1 ]; then echo "build_in_cn=1 replace apt source"; sed -i s@/archive.ubuntu.com/@/mirrors.tuna.tsinghua.edu.cn/@g /etc/apt/sources.list;  else  echo "build_in_cn is 0"; fi \
    && apt-get clean \
     && apt-get update \
     && apt-get install -y openjdk-17-jdk \
@@ -67,7 +69,7 @@ ENV GOPROXY=https://goproxy.cn,direct \
 # install flutter
 # https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.10.6-stable.tar.xz
 # https://storage.flutter-io.cn/flutter_infra_release/releases/stable/linux/flutter_linux_3.10.6-stable.tar.xz
-RUN wget  -O /tmp/flutter.tar.xz https://storage.flutter-io.cn/flutter_infra_release/releases/stable/linux/flutter_linux_$flutter_version-stable.tar.xz \
+RUN if [ $build_in_cn -eq 1 ]; then wget  -O /tmp/flutter.tar.xz https://storage.flutter-io.cn/flutter_infra_release/releases/stable/linux/flutter_linux_$flutter_version-stable.tar.xz; else wget  -O /tmp/flutter.tar.xz https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_$flutter_version-stable.tar.xz; fi \
     && tar -xf /tmp/flutter.tar.xz -C /usr/local/  \
     && export PATH=$PATH:/usr/local/flutter/bin:$HOME/.pub-cache/bin \
     && export PUB_HOSTED_URL=https://pub.flutter-io.cn \

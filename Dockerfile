@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 #ref from https://github.com/cirruslabs/docker-images-android
 LABEL org.opencontainers.image.source=https://github.com/yangjuncode/flutter-android-go-builder
@@ -44,8 +44,8 @@ RUN set -o xtrace \
     && touch /root/.android/repositories.cfg
 
 # https://developer.android.com/studio/releases/build-tools
-ENV ANDROID_PLATFORM_VERSION 33
-ENV ANDROID_BUILD_TOOLS_VERSION 33.0.3
+ENV ANDROID_PLATFORM_VERSION 34
+ENV ANDROID_BUILD_TOOLS_VERSION 34.0.0
 RUN yes | sdkmanager \
    "platforms;android-$ANDROID_PLATFORM_VERSION" \
     "build-tools;$ANDROID_BUILD_TOOLS_VERSION" "build-tools;30.0.3"  

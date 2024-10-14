@@ -1,5 +1,5 @@
 # flutter-android-go-builder
-
+  
 ## 使用方法
 
   先修改build.sh中的参数，然后执行
@@ -37,3 +37,9 @@ Using the CLI for your container type, sign in to the Container registry service
 
 $ echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
 > Login Succeeded
+
+## 清理docker build环境
+
+```shell
+docker system prune -a
+```

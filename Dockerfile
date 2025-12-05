@@ -7,8 +7,14 @@ USER root
 
 ARG build_in_cn=0
 
-ARG go_version=1.21.11
-ARG flutter_version=3.19.6
+# 版本参数 - 可通过 --build-arg 覆盖
+ARG go_version=1.24.10
+ARG flutter_version=3.32.8
+ARG ndk_version=27.3.13750724
+ARG sdk_tools_version=13114758
+ARG platform_version=34
+ARG build_tools_version=34.0.0
+ARG cmake_version=3.22.1
 
 ENV ANDROID_HOME=/opt/android-sdk-linux \
     LANG=en_US.UTF-8 \
@@ -19,7 +25,9 @@ ENV ANDROID_SDK_ROOT=$ANDROID_HOME \
     PATH=${PATH}:${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/emulator
 
 # comes from https://developer.android.com/studio/#command-tools
-ENV ANDROID_SDK_TOOLS_VERSION 11076708
+# https://developer.android.com/studio#command-line-tools-only
+# Latest version: https://dl.google.com/android/repository/commandlinetools-linux-{VERSION}_latest.zip
+ENV ANDROID_SDK_TOOLS_VERSION=${sdk_tools_version}
 
 RUN set -o xtrace \
     && cd /opt \
@@ -46,15 +54,16 @@ RUN set -o xtrace \
     && touch /root/.android/repositories.cfg
 
 # https://developer.android.com/studio/releases/build-tools
-ENV ANDROID_PLATFORM_VERSION 34
-ENV ANDROID_BUILD_TOOLS_VERSION 34.0.0
+ENV ANDROID_PLATFORM_VERSION=${platform_version}
+ENV ANDROID_BUILD_TOOLS_VERSION=${build_tools_version}
 RUN yes | sdkmanager \
    "platforms;android-$ANDROID_PLATFORM_VERSION" \
-    "build-tools;$ANDROID_BUILD_TOOLS_VERSION" "build-tools;30.0.3"  
+    "build-tools;$ANDROID_BUILD_TOOLS_VERSION"  
 
 # https://developer.android.com/ndk/downloads
-ENV ANDROID_NDK_VERSION 23.1.7779620
-RUN yes | sdkmanager "ndk;$ANDROID_NDK_VERSION"  "cmake;3.22.1" >> /dev/null
+ENV ANDROID_NDK_VERSION=${ndk_version}
+ENV ANDROID_CMAKE_VERSION=${cmake_version}
+RUN yes | sdkmanager "ndk;$ANDROID_NDK_VERSION" "cmake;$ANDROID_CMAKE_VERSION" >> /dev/null
 ENV PATH=$PATH:${ANDROID_HOME}/ndk/${ANDROID_NDK_VERSION}/toolchains/llvm/prebuilt/linux-x86_64/bin/
 
 # 安装go环境

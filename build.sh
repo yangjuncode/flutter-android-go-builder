@@ -6,24 +6,24 @@
 # ============================================
 
 # Go 版本 - https://go.dev/dl/
-export GO_VERSION=1.24.10
+export GO_VERSION=1.25.5
 
 # Flutter 版本 - https://docs.flutter.dev/release/archive
-export FLUTTER_VERSION=3.32.8
+export FLUTTER_VERSION=3.38.5
 
 # Android NDK 版本 - https://developer.android.com/ndk/downloads
-export NDK_VERSION=27.3.13750724
+export NDK_VERSION=28.2.13676358
 
 # Android SDK Command-line Tools 版本
 # https://developer.android.com/studio#command-line-tools-only
 export SDK_TOOLS_VERSION=13114758
 
 # Android Platform 版本 (compileSdkVersion)
-export PLATFORM_VERSION=34
+export PLATFORM_VERSION=35
 
 # Android Build Tools 版本
 # https://developer.android.com/studio/releases/build-tools
-export BUILD_TOOLS_VERSION=34.0.0
+export BUILD_TOOLS_VERSION=35.0.0
 
 # CMake 版本 - https://developer.android.com/studio/projects/install-ndk#default-ndk-per-agp
 export CMAKE_VERSION=3.22.1

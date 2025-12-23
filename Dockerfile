@@ -44,10 +44,9 @@ RUN set -o xtrace \
     && update-locale LANG=en_US.UTF-8 \
     && wget -q https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_TOOLS_VERSION}_latest.zip -O android-sdk-tools.zip \
     && mkdir -p ${ANDROID_HOME}/cmdline-tools/ \
-    && unzip -q android-sdk-tools.zip -d ${ANDROID_HOME}/cmdline-tools/ \
+    && unzip -q android-sdk-tools.zip -d ${ANDROID_HOME}/cmdline-tools/ && rm android-sdk-tools.zip \
     && mv ${ANDROID_HOME}/cmdline-tools/cmdline-tools ${ANDROID_HOME}/cmdline-tools/latest \
     && chown -R root:root $ANDROID_HOME \
-    && rm android-sdk-tools.zip \
     && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
     && yes | sdkmanager --licenses >> /dev/null \
     && touch /root/.android/repositories.cfg \
@@ -81,7 +80,7 @@ ENV GOPROXY=https://goproxy.cn,direct \
 # https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.10.6-stable.tar.xz
 # https://storage.flutter-io.cn/flutter_infra_release/releases/stable/linux/flutter_linux_3.10.6-stable.tar.xz
 RUN if [ $build_in_cn -eq 1 ]; then wget  -O /tmp/flutter.tar.xz https://storage.flutter-io.cn/flutter_infra_release/releases/stable/linux/flutter_linux_$flutter_version-stable.tar.xz; else wget  -O /tmp/flutter.tar.xz https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_$flutter_version-stable.tar.xz; fi \
-    && tar -xf /tmp/flutter.tar.xz -C /usr/local/  \
+    && tar -xf /tmp/flutter.tar.xz -C /usr/local/ && rm /tmp/flutter.tar.xz  \
     && export PATH=$PATH:/usr/local/flutter/bin:$HOME/.pub-cache/bin \
     && export PUB_HOSTED_URL=https://pub.flutter-io.cn \
     && export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn \

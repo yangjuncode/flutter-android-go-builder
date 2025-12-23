@@ -2,7 +2,7 @@
 
 # ============================================
 # Flutter Android Go Builder - 版本配置
-# 适配 Flutter 3.32.8
+# 适配 Flutter 3.38.5
 # ============================================
 
 # Go 版本 - https://go.dev/dl/
@@ -44,3 +44,8 @@ docker build \
     --build-arg="cmake_version=${CMAKE_VERSION}" \
     --build-arg="build_in_cn=${BUILD_IN_CN}" \
     -t ghcr.io/yangjuncode/flutter-builder:${FLUTTER_VERSION} .
+
+#if has param -p, push to docker registry
+if [[ $1 == "-p" ]]; then
+    docker push ghcr.io/yangjuncode/flutter-builder:${FLUTTER_VERSION}
+fi

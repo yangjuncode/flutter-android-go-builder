@@ -5,6 +5,8 @@ LABEL org.opencontainers.image.source=https://github.com/yangjuncode/flutter-and
 
 USER root
 
+ENV HOME=/root
+
 ARG build_in_cn=0
 
 # 版本参数 - 可通过 --build-arg 覆盖

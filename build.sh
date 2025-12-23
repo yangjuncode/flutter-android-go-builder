@@ -28,6 +28,9 @@ export BUILD_TOOLS_VERSION=35.0.0
 # CMake 版本 - https://developer.android.com/studio/projects/install-ndk#default-ndk-per-agp
 export CMAKE_VERSION=3.22.1
 
+# 是否在国内构建 (0: 国外, 1: 国内)
+export BUILD_IN_CN=0
+
 # ============================================
 # Docker 构建
 # ============================================
@@ -39,4 +42,5 @@ docker build \
     --build-arg="platform_version=${PLATFORM_VERSION}" \
     --build-arg="build_tools_version=${BUILD_TOOLS_VERSION}" \
     --build-arg="cmake_version=${CMAKE_VERSION}" \
+    --build-arg="build_in_cn=${BUILD_IN_CN}" \
     -t ghcr.io/yangjuncode/flutter-builder:${FLUTTER_VERSION} .

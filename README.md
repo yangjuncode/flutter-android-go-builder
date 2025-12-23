@@ -11,8 +11,8 @@ docker push ghcr.io/yangjuncode/flutter-builder:${FLUTTER_VERSION}
 
 参数说明：
 
-- `go_version`：go版本，默认为1.21.13
-- `flutter_version`：flutter版本，默认为3.24.3
+- `go_version`：go版本，默认为1.25.5
+- `flutter_version`：flutter版本，默认为3.38.5
 - `build_in_cn`：是否在国内构建，默认为0，即在国外构建
 
 
